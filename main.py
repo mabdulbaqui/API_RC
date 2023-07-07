@@ -13,6 +13,10 @@ ser = serial.Serial('COM6', 9600)
 # Dummy value to simulate value changing, as we're not using Arduino
 value = 280
 recording = False
+<<<<<<< HEAD
+=======
+speed = 0  # Global variable for speed
+>>>>>>> 2f10285 (Initial commit)
 
 # Create a global variable for the OpenCV VideoCapture object
 cap = None
@@ -20,7 +24,11 @@ cap = None
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
+<<<<<<< HEAD
     global value, recording
+=======
+    global value, recording, speed  # Declare speed as global
+>>>>>>> 2f10285 (Initial commit)
 
     # Read Arduino value
     arduino_reading = ser.readline().decode().strip()
@@ -28,6 +36,12 @@ def index():
     # Check if this is a POST request
     if request.method == 'POST':
         # Check which button was pressed
+<<<<<<< HEAD
+=======
+        # ... (rest of your existing code)
+
+        # Logic for existing buttons
+>>>>>>> 2f10285 (Initial commit)
         if 'add' in request.form:
             value += 5
             val = f"S.{value}"
@@ -45,11 +59,19 @@ def index():
 
         elif 'stop_robot' in request.form:
             ser.write(b"M.0\n")
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2f10285 (Initial commit)
         elif 'start_recording' in request.form:
             recording = True
             print("Start recording command")
             # Start the capture thread
             threading.Thread(target=capture_frames).start()
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2f10285 (Initial commit)
         elif 'stop_recording' in request.form:
             recording = False
             print("Stop recording command")
@@ -57,7 +79,28 @@ def index():
             if cap is not None:
                 cap.release()
 
+<<<<<<< HEAD
     return render_template('index.html', value=value, arduino_reading=arduino_reading)
+=======
+        # Logic for new buttons
+        elif 'speed_up' in request.form:
+            # Increase the speed by 5
+            speed += 5
+            print(f"Speed increased to {speed}")
+            # Optionally, send a command to Arduino with new speed
+            # Example:
+            # ser.write(bytes(f"speed.{speed}", 'utf-8'))
+
+        elif 'speed_down' in request.form:
+            # Decrease the speed by 5
+            speed -= 5
+            print(f"Speed decreased to {speed}")
+            # Optionally, send a command to Arduino with new speed
+            # Example:
+            # ser.write(bytes(f"speed.{speed}", 'utf-8'))
+
+    return render_template('index.html', value=value, arduino_reading=arduino_reading, speed=speed)
+>>>>>>> 2f10285 (Initial commit)
 
 
 def capture_frames():

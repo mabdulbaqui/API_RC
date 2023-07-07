@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from flask import Flask, render_template, request, redirect, url_for
 import threading
 import cv2
@@ -20,12 +21,33 @@ def index():
 
     # Mocked reading from Arduino
     arduino_reading = "Mocked Arduino Reading"
+=======
+from flask import Flask, render_template, request
+import threading
+import os
+import time
+
+app = Flask(__name__)
+
+# Dummy value to simulate changing values without Arduino
+value = 280
+speed = 0
+recording = False
+
+@app.route("/", methods=['GET', 'POST'])
+def index():
+    global value, recording, speed
+
+    # Simulate an Arduino reading
+    arduino_reading = "Simulated reading"
+>>>>>>> 2f10285 (Initial commit)
 
     # Check if this is a POST request
     if request.method == 'POST':
         # Check which button was pressed
         if 'add' in request.form:
             value += 5
+<<<<<<< HEAD
             print(f"Simulated sending value to Arduino: S.{value}")  # Print statement to simulate sending to Arduino
 
         elif 'subtract' in request.form:
@@ -94,6 +116,49 @@ def capture_frames():
 
     # Release the camera when done
     cap.release()
+=======
+
+        elif 'subtract' in request.form:
+            value -= 5
+
+        elif 'start_robot' in request.form:
+            print("Start robot command")
+
+        elif 'stop_robot' in request.form:
+            print("Stop robot command")
+
+        elif 'start_recording' in request.form:
+            recording = True
+            print("Start recording command")
+            # Start the simulated capture thread
+            threading.Thread(target=simulated_capture_frames).start()
+
+        elif 'stop_recording' in request.form:
+            recording = False
+            print("Stop recording command")
+
+        elif 'speed_up' in request.form:
+            # Increase the speed by 5
+            speed += 5
+            print(f"Speed increased to {speed}")
+
+        elif 'speed_down' in request.form:
+            # Decrease the speed by 5
+            speed -= 5
+            print(f"Speed decreased to {speed}")
+
+    return render_template('index.html', value=value, arduino_reading=arduino_reading, speed=speed)
+
+
+def simulated_capture_frames():
+    # Simulate the recording of frames
+    while recording:
+        # Simulate the saving of a frame
+        print(f"Simulated saving of frame at value {value}")
+
+        # Sleep for a bit to not overwhelm the system
+        time.sleep(1)
+>>>>>>> 2f10285 (Initial commit)
 
 
 # Start Flask application
