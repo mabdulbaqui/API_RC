@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Robot Controller</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        .control-panel {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .control-panel button {
+            margin: 10px;
+            font-size: 20px;
+        }
+
+        .value-display {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        .code-display pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Robot Controller</h1>
+
+        <div class="control-panel">
+            <form action="/" method="post">
+                <button type="submit" name="start_robot" class="btn btn-success">Start Robot</button>
+                <button type="submit" name="stop_robot" class="btn btn-danger">Stop Robot</button>
+                <button type="submit" name="start_recording" class="btn btn-primary">Start Recording</button>
+                <button type="submit" name="stop_recording" class="btn btn-secondary">Stop Recording</button>
+                <button type="submit" name="add" class="btn btn-info">Add</button>
+                <button type="submit" name="subtract" class="btn btn-warning">Subtract</button>
+            </form>
+        </div>
+
+        <div class="value-display">
+            <p>Value: {{ value }}</p>
+            <p>Arduino Reading: {{ arduino_reading }}</p>
+        </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
